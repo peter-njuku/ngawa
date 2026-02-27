@@ -1,0 +1,22 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div class="">
+            <a href="{% url 'shop' %}" class="inline-block mt-6 text-sm text-blue-600 hover:underline">← Back to Shop</a>
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-auto rounded-lg shadow object-cover">
+        </div>
+        <div class="flex flex-col justify-center">
+            <h1 class="text-3xl font-bold text-gray-800">{{ product.name }}</h1>
+            <p class="text-xl text-blue-600 font-semibold mt-2">Ksh. {{ product.price }}</p>
+            <p class="mt-6 text-gray-700 leading-relaxed">{{ product.description }}</p>
+            <p class="mt-4 text-sm text-gray-500">Category: {{ product.category|title }}</p><br><br>
+            <a href="https://wa.me/254721761673" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-full font-semibold transition transform duration-300 hover:-translate-y-1 hover:shadow-lg hover:bg-blue-700"><img src="{% static 'images/app.jpg' %}" alt="" class="inline h-4 w-4 mr-2">Chat me on Whatsapp</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

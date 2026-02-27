@@ -1,0 +1,82 @@
+{% load static %}
+{% load date_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ngawa Solutions</title>
+    <link rel="icon" size='any' type="img/x-icon" href="{% static 'images/icon.ico' %}" >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+</head>
+<body>
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex justify-between h-16 items-center">
+                    <a href="{% url 'home' %}" class="text-2xl font-extrabold tracking-tight text-gray-900">NGAWA SOLUTIONS</a>
+                </div>
+                <div>
+                    <p class="absolute left-1/2 transform -translate-x-1/2 text-indigo-600 font-serif text-sm"><img src="{% static 'images/phone.jpg' %}" class="inline h-4 w-4 mr-2"> Contact us on <a href="tel:+254721761673">+2547 21 761673</a></p>
+                </div>
+                <div class="ml-auto flex items-center space-x-6">
+                    
+                    <a href="{% url 'home' %}" class="text-gray-700 hover:text-blue-600 font-medium ml-5">Home</a>
+                    <a href="{% url 'shop' %}" class="text-gray-700 hover:text-blue-600 font-medium ml-5">Shop</a>
+                    <a href="{% url 'about' %}" class="text-gray-700 hover:text-blue-600 font-medium ml-5">About us</a>
+                    <a href="{% url 'contact' %}" class="text-gray-700 hover:text-blue-600 font-medium ml-5">Contact</a>
+                </div>
+                <div>
+                    <a href=""></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    {% block content %}
+    {% endblock %}
+
+    <footer class="bg-gray-900 text-gray-300 py-10">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h4 class="text-white font-semibold mb-4">Ngawa Solutions</h4>
+                <p>We supply laptops, desktops, and accessories across Kenya — trusted by students, businesses, and professionals.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold mb-4">Quick links</h4>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'shop' %}">Shop</a></li>
+                    <li><a href="{% url 'about' %}">About us</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold mb-4">Contact</h4>
+                <ul>
+                    <li><img src="{% static 'images/location.jpg' %}" class="inline h-4 w-4 mr-2">Nairobi, Kenya</li>
+                    <li><img src="{% static 'images/phone.jpg' %}" alt="" class="inline h-4 w-4 mr-2"><a href="tel:+254721761673">+2547 21 761673</a></li>
+                    <li><img src="{% static 'images/mail.jpg' %}" alt="" class="inline h-4 w-4 mr-2"><a href="mailto:ngawa.solutions@gmail.com"></a>ngawa.solutions@gmail.com</li>
+                    <li><img src="{% static 'images/app.jpg' %}" alt="" class="inline h-4 w-4 mr-2"><a href="https://wa.me/254721761673"></a>+2547 21 761673</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold mb-4">Follow us</h4>
+                <div>
+                    <ul>
+                        <li><img src="{% static '/images/tiktok.jpg' %}" alt="" class="inline h-4 w-4 mr-2"></li>
+                        <li><img src="{% static '/images/x.jpg' %}" alt="" class="inline h-4 w-4 mr-2"></li>
+                        <li><img src="{% static '/images/facebook.jpg' %}" alt="" class="inline h-4 w-4 mr-2"></li>
+                        <li></li>
+                    </ul>
+                </div>
+            </div>
+        </div><br><br>
+        <p class="max-w-7xl mx-auto px-4 text-center space-y-2">&copy;{% current_year %}  Ngawa Solutions. All rights reserved.</p>
+    </footer>
+</body>
+</html>

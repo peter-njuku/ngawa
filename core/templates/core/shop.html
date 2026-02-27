@@ -1,0 +1,33 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% load base64_filters %}
+
+{% block content %}
+
+<section>
+    <div class="max-w-7xl mx-auto px-4">
+        <h1 class="text-3xl font-bold text-gray-800 mb-4">Shop</h1>
+        <div class="flex justify-center gap-4 mb-8">
+            <a href="{% url 'shop' %}" class="px-4 py-2 bg-white rounded shadow hover:bg-blue-600 hover:text-white transition">All</a>
+            {% for cat in category_list %}
+            <a href="{% url 'shop' %}?category={{ cat|to_b64 }}" class="px-4 py-2 bg-white rounded shadow hover:bg-blue-600 hover:text-white transition">{{ cat|title }}</a>
+            {% endfor %}
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {% for product in products  %}
+            <div class="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="h-40 w-full object-cover rounded mb-4">
+                
+                <a href="{% url 'product_details' product.slug %}"></a>
+                <h2 class="text-lg font-semibold text-gray-800">{{ product.name }}</h2>
+                <p class="text-blue-600 font-bold text-md mt-2">Ksh: {{ product.price }}</p>
+                <a href="{% url 'product_details' product.slug %}" class="inline-block mt-3 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">View</a>
+            </div>
+            {% empty %}
+            <p class="col-span-4 text-center text-gray-500">No Products found in this category.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

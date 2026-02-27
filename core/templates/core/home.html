@@ -1,0 +1,38 @@
+
+{% extends "core/base.html" %}
+
+
+{% load static %}
+
+{% block content %}
+
+<section class="bg-gradient-to-r from-blue-600 via-indigo-700 to-purple-600 text-white py-20 px-4 text-center">
+    <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Welcome to Ngawa Solutions</h1>
+    <p class="text-lg md:text-xl mb-6 text-white/90">Your one stop shop for high performance laptops, desktops and accessories at unbeatable prices.</p>
+    <a href="{% url 'shop' %}" class="inline-block bg-white text-blue-700 font-semibold px-6 py-3 rounded-full shadow-md transition transform duration-300 hover:-translate-y-1 hover:shadow-xl hover:bg-gray-100">Shop Now!!</a>
+</section>
+<main class="py-12 bg-white">
+    <div class="max-w-5xl mx-auto px-4 text-center">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Who We Are</h2>
+            <p class="text-gray-600 text-lg mb-6">
+                Ngawa Solutions is your trusted tech solution based in <strong>Nairobi, Kenya</strong>, specializing in the sale of laptops, desktops, and accessories.
+            </p>
+            <p class="text-gray-600 text-lg mb-6">
+                We are committed to providing high-quality, genuine products at affordable prices for students, businesses, and tech enthusiasts alike.
+          Our clients enjoy fast delivery, friendly customer support, and after-sales services including warranty support.
+            </p>
+            <p class="text-gray-600 text-lg mb-6">
+                Whether you're looking to upgrade your setup, equip an office, or find reliable accessories, Ngawa Solutions has you covered — with nationwide delivery from the heart of Nairobi.
+            </p>
+            <a href="{% url 'about' %}" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-full font-semibold transition transform duration-300 hover:-translate-y-1 hover:shadow-lg hover:bg-blue-700">Read More</a>
+        </div>
+        <div>
+            <img src="{% static 'images/Computer.jpg' %}" alt="" class="w-full h-auto rounded-lg shadow-lg object-cover transform transition duration-500 hover:-translate-y-2 hover:shadow-2xl">
+        </div>
+    </div>
+    </div>
+</main>
+
+{% endblock %}

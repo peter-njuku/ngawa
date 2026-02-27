@@ -1,0 +1,73 @@
+{% extends 'core/mobile_base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="bg-gradient-to-r from-blue-600 via-indigo-700 to-purple-600 text-white py-20 px-4 text-center">
+    <h1 class="text-3xl sm:text-4xl font-extrabold mb-3">About us</h1>
+    <p class="text-base sm:text-lg mb-4 text-white/90">Get to know what we do and why customers trust us</p>
+</section>
+
+<section class="py-16 bg-white">
+
+    <div class="max-w-6xl mx-auto px-4 flex flex-col-reverse gap-10 lg:grid lg:grid-cols-2 lg:gap-12 items-center">
+        <div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Welcome to Ngawa Solutions</h2>
+            <p class="text-gray-700 text-base sm:text-lg leading-relaxed mb-4">At Ngawa Solutions, we specialize in providing comprehensive solutions for all your technology needs. From selling high-quality laptops, desktops, printers, and accessories to offering expert repair services, we are committed to keeping your devices running smoothly.</p>
+            <p class="text-gray-700 text-base sm:text-lg leading-relaxed mb-4">In addition to our core services, we install advanced security fences tailored to safeguard your premises. We also take pride in our environmentally responsible approach by offering collection and disposal services for used computers and electronic equipment. Our disposal practices adhere strictly to legal standards, including the Resource Conservation & Recovery Act (RCRA) and other e-waste laws, ensuring proper recycling and minimizing environmental harm. Sensitive data is securely sanitized using techniques compliant with industry standards like the United States Department of Defense standard 5220.22-M</p>
+            <p class="text-gray-700 text-base sm:text-lg leading-relaxed mb-4">At Ngawa Solutions, our mission is to provide reliable, sustainable, and innovative solutions while fostering trust and excellence in every service we deliver. Feel free to adjust the name or add any specific branding elements!</p>
+        </div>
+        <div 
+    x-data="{
+        slides: [
+            '{% static 'images/laptop.jpg' %}',
+            '{% static 'images/Computer.jpg' %}',
+            '{% static 'images/printer.jpg' %}',
+            '{% static 'images/ram.jpg' %}',
+            '{% static 'images/ssd.jpg' %}'
+        ],
+        currentIndex: 0,
+        next() {
+            this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+        },
+        prev() {
+            this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+        },
+        autoplay() {
+            setInterval(() => this.next(), 4000);
+        }
+    }" 
+    x-init="autoplay()" 
+    class="relative w-full h-64 sm:h-80 md:h-[500px] lg:h-[600px] rounded-lg shadow-lg overflow-hidden"
+>
+    <img :src="slides[currentIndex]" alt="About Ngawa" class="object-cover w-full h-full transition duration-500">
+
+    <button @click="prev" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-90 text-gray-700 rounded-full p-2 shadow">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+    </button>
+    
+    <button @click="next" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-90 text-gray-700 rounded-full p-2 shadow">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+    </button>
+
+    
+    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+        <template x-for="(slide, index) in slides" :key="index">
+            <button 
+                @click="currentIndex = index" 
+                class="w-2 h-2 rounded-full transition-colors"
+                :class="index === currentIndex ? 'bg-white' : 'bg-white/50'"
+                :aria-label="`Go to slide ${index + 1}`">
+            </button>
+        </template>
+    </div>
+</div>
+
+</section>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+{% endblock %}
