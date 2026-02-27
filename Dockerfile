@@ -21,6 +21,12 @@ COPY . /app/
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
+# Create a directory for the database
+RUN mkdir -p /app/data && chmod 777 /app/data
+
+# Ensure the entrypoint is executable (just in case)
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
 # Expose port for gunicorn
 EXPOSE 8000
 
