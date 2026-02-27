@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-dw1&n9_t%w%cnxn!l&9&-&@s-=&rd_vi16(1@5b85s-0ai^lm9'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-dw1&n9_t%w%cnxn!l&9&-&@s-=&rd_vi16(1@5b85s-0ai^lm9')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False').lower() in ('1', 'true', 'yes')
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(',')
 
 
 # Application definition
@@ -76,17 +78,17 @@ WSGI_APPLICATION = 'ngawa.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# Use PostgreSQL when environment variables are provided, otherwise fallback to SQLite
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('ngawa_29f4'),
-        'USER': os.getenv('ngawa_29f4_user'),
-        'PASSWORD': os.getenv('uWuBzFrfKR6WtQzBmsHyFP2yj37JlMhe'),
-        'HOST': os.getenv('dpg-cvvphvre5dus73ch9hm0-a'),
-        'PORT': os.getenv('5432'),
+        'ENGINE': os.environ.get('DB_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME': os.environ.get('DB_NAME', BASE_DIR / 'db.sqlite3'),
+        'USER': os.environ.get('POSTGRES_USER', ''),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
+        'HOST': os.environ.get('POSTGRES_HOST', ''),
+        'PORT': os.environ.get('POSTGRES_PORT', ''),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
