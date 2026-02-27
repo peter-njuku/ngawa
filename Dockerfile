@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends gcc libpq-dev && \
+    apt-get install -y --no-install-recommends gcc && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy requirements and install
@@ -17,11 +17,13 @@ RUN pip install --upgrade pip && \
 # Copy project source
 COPY . /app/
 
-# Collect static files (if any)
-RUN python manage.py collectstatic --noinput
+# Add entrypoint script
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Expose port for gunicorn
 EXPOSE 8000
 
-# Default command
+# Default entrypoint and command
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["gunicorn", "ngawa.wsgi:application", "--bind", "0.0.0.0:8000"]
