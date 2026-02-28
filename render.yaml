@@ -1,0 +1,53 @@
+services:
+  - type: web
+    name: ngawa-django
+    runtime: docker
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: DEBUG
+        value: "False"
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: ALLOWED_HOSTS
+        value: "ngawa-django.onrender.com"
+      - key: DB_ENGINE
+        value: "django.db.backends.postgresql"
+      - key: POSTGRES_HOST
+        fromService:
+          type: pserv
+          name: ngawa-db
+          property: host
+      - key: POSTGRES_PORT
+        fromService:
+          type: pserv
+          name: ngawa-db
+          property: port
+      - key: POSTGRES_USER
+        fromService:
+          type: pserv
+          name: ngawa-db
+          envVarKey: POSTGRES_USER
+      - key: POSTGRES_PASSWORD
+        fromService:
+          type: pserv
+          name: ngawa-db
+          envVarKey: POSTGRES_PASSWORD
+      - key: DB_NAME
+        fromService:
+          type: pserv
+          name: ngawa-db
+          envVarKey: POSTGRES_DB
+
+  - type: pserv
+    name: ngawa-db
+    plan: free
+    runtime: postgres
+    ipAllowList: []
+    envVars:
+      - key: POSTGRES_USER
+        value: neondb_owner
+      - key: POSTGRES_PASSWORD
+        generateValue: true
+      - key: POSTGRES_DB
+        value: ngawa_prod
